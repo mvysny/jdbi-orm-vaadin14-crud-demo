@@ -12,6 +12,10 @@ import java.time.LocalDate;
 
 import static com.gitlab.mvysny.jdbiorm.JdbiOrm.jdbi;
 
+/**
+ * A standard servlet context listener, run by the servlet container such as Tomcat.
+ * Configures JDBI-ORM and creates the SQL table for the {@link Person} entity.
+ */
 @WebListener
 public class Bootstrap implements ServletContextListener {
     @Override
