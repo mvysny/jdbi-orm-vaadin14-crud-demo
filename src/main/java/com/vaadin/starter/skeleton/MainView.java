@@ -1,16 +1,14 @@
 package com.vaadin.starter.skeleton;
 
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.CallbackDataProvider;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.Query;
-import com.vaadin.flow.data.renderer.ClickableRenderer;
 import com.vaadin.flow.data.renderer.NativeButtonRenderer;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +23,27 @@ public class MainView extends VerticalLayout {
 
     public MainView() {
 
-        DataProvider<Person, Void> dp = DataProvider.fromCallbacks(new CallbackDataProvider.FetchCallback<Person, Void>() {
+        DataProvider<Person, Void> dp = createPersonDataProvider();
+
+        final Grid<Person> personGrid = new Grid<>(Person.class);
+        personGrid.setDataProvider(dp);
+        add(personGrid);
+
+        personGrid.addColumn(new NativeButtonRenderer<>("Edit", item -> {
+            final CreateEditPersonDialog dialog = new CreateEditPersonDialog(item);
+            dialog.onSaveOrCreateListener = () -> personGrid.getDataProvider().refreshAll();
+            dialog.open();
+        })).setKey("edit");
+
+        personGrid.addColumn(new NativeButtonRenderer<>("Delete", item -> {
+            item.delete();
+            personGrid.getDataProvider().refreshAll();
+        })).setKey("delete");
+    }
+
+    @NotNull
+    private static CallbackDataProvider<Person, Void> createPersonDataProvider() {
+        return DataProvider.fromCallbacks(new CallbackDataProvider.FetchCallback<Person, Void>() {
             @Override
             public Stream<Person> fetch(Query<Person, Void> query) {
                 log.info("Fetching Person: " + query.getOffset() + " " + query.getLimit());
@@ -37,14 +55,6 @@ public class MainView extends VerticalLayout {
                 return (int) Person.dao.count();
             }
         });
-
-        final Grid<Person> personGrid = new Grid<>(Person.class);
-        personGrid.setDataProvider(dp);
-        add(personGrid);
-        personGrid.addColumn(new NativeButtonRenderer<>("Delete", item -> {
-            item.delete();
-            personGrid.getDataProvider().refreshAll();
-        })).setKey("delete");
     }
 
     private static final Logger log = LoggerFactory.getLogger(MainView.class);

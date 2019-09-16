@@ -1,15 +1,19 @@
 package com.vaadin.starter.skeleton;
 
+import com.github.mvysny.kaributesting.v10.GridKt;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.textfield.TextField;
 import kotlin.Unit;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static com.github.mvysny.kaributesting.v10.GridKt.*;
 import static com.github.mvysny.kaributesting.v10.LocatorJ.*;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 /**
  * Uses the Karibu-Testing framework: https://github.com/mvysny/karibu-testing/tree/master/karibu-testing-v10
@@ -43,5 +47,29 @@ public class MainViewTest extends AbstractAppLauncher {
         _clickRenderer(grid, 0, "delete", component -> Unit.INSTANCE);
         expectRows(grid, 0);
         assertNull(Person.dao.findByName("Jon Lord0"));
+    }
+
+    /**
+     * Tests a simple person edit test case.
+     */
+    @Test
+    public void testEditPerson() {
+        Person.createDummy(0);
+        Grid<Person> grid = _get(Grid.class);
+        _clickRenderer(grid, 0, "edit", component -> Unit.INSTANCE);
+        // the dialog is shown
+        _assertOne(PersonForm.class);
+        _setValue(_get(TextField.class, spec -> spec.withCaption("Name:")), "Vladimir Harkonnen");
+        _click(_get(Button.class, spec -> spec.withCaption("Save")));
+
+        // the dialog is gone
+        _assertNone(PersonForm.class);
+        assertEquals("Vladimir Harkonnen", Person.dao.findAll().get(0).getName());
+
+        // check that the grid has been refreshed
+        grid = _get(Grid.class);
+        final String formattedRow = String.join(", ", _getFormattedRow(grid, 0));
+        assertTrue("row: " + formattedRow, formattedRow.contains("Vladimir Harkonnen") &&
+                !formattedRow.contains("Jon Lord"));
     }
 }
