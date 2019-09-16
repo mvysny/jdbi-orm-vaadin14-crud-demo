@@ -147,6 +147,9 @@ public class Person implements Entity<Long> {
 
     @Override
     public void save(boolean validate) {
+        // always override the save(boolean) method, and not save().
+        // If you only override save(), your code is not going to be called when
+        // somebody calls save(boolean).
         if (id == null) {
             created = Instant.now();
         }
@@ -158,6 +161,10 @@ public class Person implements Entity<Long> {
 
     public static class PersonDao extends Dao<Person, Long> {
 
+        /**
+         * protected so that PersonDao won't pop up in the IDE auto-completion
+         * dialog when you type in {@code new Person}.
+         */
         protected PersonDao() {
             super(Person.class);
         }
@@ -168,6 +175,11 @@ public class Person implements Entity<Long> {
         }
     }
 
+    /**
+     * Creates a dummy person the database.
+     * @param i
+     * @return
+     */
     public static Person createDummy(int i) {
         final Person person = new Person("Jon Lord" + i, 42);
         person.setDateOfBirth(LocalDate.of(1970, 1, 12));
