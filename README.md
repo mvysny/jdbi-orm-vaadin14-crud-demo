@@ -6,8 +6,6 @@
 A demo project showing the CRUD capabilities of the [JDBI-ORM](https://gitlab.com/mvysny/jdbi-orm)
 ORM library.
 
-WORK IN PROGRESS
-
 ## Running
 
 Clone this github repository and import the project to the IDE of your choice as a Maven project. You need to have Java 8 or 11 installed.
