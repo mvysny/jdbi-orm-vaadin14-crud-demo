@@ -1,12 +1,12 @@
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin-flow/Lobby#?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![Build Status](https://travis-ci.org/mvysny/vaadin14-embedded-jetty.svg?branch=master)](https://travis-ci.org/mvysny/vaadin14-embedded-jetty)
+[![Build Status](https://travis-ci.org/mvysny/jdbi-orm-vaadin14-crud-demo.svg?branch=master)](https://travis-ci.org/mvysny/jdbi-orm-vaadin14-crud-demo)
 
-# Vaadin 14 npm Polymer 3 running in Embedded Jetty
+# JDBI-ORM demo using the Vaadin 14 npm Polymer 3
 
-A demo project showing the possibility of running a Vaadin 14 app from an
-embedded Jetty, as a simple `main()` method.
+A demo project showing the CRUD capabilities of the [JDBI-ORM](https://gitlab.com/mvysny/jdbi-orm)
+ORM library.
 
-## Developing
+## Running
 
 Clone this github repository and import the project to the IDE of your choice as a Maven project. You need to have Java 8 or 11 installed.
 
@@ -18,6 +18,17 @@ Clone this github repository and import the project to the IDE of your choice as
    
 See [ManualJetty.java](src/main/java/com/vaadin/starter/skeleton/ManualJetty.java)
 for details on how to configure Jetty properly.
+
+## Developing
+
+Run the `ManualJetty` class in debug mode - the JVM hot-redeployment capabilities
+should auto-redeploy changed classes and resources.
+
+## About The Project
+
+Dissection of the project files:
+
+TODO
 
 ## Packaging for production
 
