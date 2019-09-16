@@ -7,6 +7,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.CallbackDataProvider;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.Query;
+import com.vaadin.flow.data.renderer.ClickableRenderer;
+import com.vaadin.flow.data.renderer.NativeButtonRenderer;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import org.slf4j.Logger;
@@ -39,6 +41,10 @@ public class MainView extends VerticalLayout {
         final Grid<Person> personGrid = new Grid<>(Person.class);
         personGrid.setDataProvider(dp);
         add(personGrid);
+        personGrid.addColumn(new NativeButtonRenderer<>("Delete", item -> {
+            item.delete();
+            personGrid.getDataProvider().refreshAll();
+        })).setKey("delete");
     }
 
     private static final Logger log = LoggerFactory.getLogger(MainView.class);

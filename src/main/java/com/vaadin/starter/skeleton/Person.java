@@ -5,6 +5,10 @@ import com.gitlab.mvysny.jdbiorm.Entity;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 import org.jetbrains.annotations.Nullable;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -14,13 +18,22 @@ import java.util.Objects;
  */
 public class Person implements Entity<Long> {
     private Long id;
+    @NotNull
+    @Size(min = 1, max = 200)
     private String name;
+    @NotNull
+    @Min(15)
+    @Max(100)
     private Integer age;
     private LocalDate dateOfBirth;
+    @NotNull
     private Instant created;
+    @NotNull
     private Instant modified;
+    @NotNull
     @ColumnName("alive")
     private Boolean isAlive;
+    @NotNull
     private MaritalStatus maritalStatus;
 
     public enum MaritalStatus {
@@ -141,5 +154,26 @@ public class Person implements Entity<Long> {
         Entity.super.save(validate);
     }
 
-    public static final Dao<Person, Long> dao = new Dao<>(Person.class);
+    public static final PersonDao dao = new PersonDao();
+
+    public static class PersonDao extends Dao<Person, Long> {
+
+        protected PersonDao() {
+            super(Person.class);
+        }
+
+        @Nullable
+        public Person findByName(@org.jetbrains.annotations.NotNull String name) {
+            return findOneBy("name=:name", q -> q.bind("name", name));
+        }
+    }
+
+    public static Person createDummy(int i) {
+        final Person person = new Person("Jon Lord" + i, 42);
+        person.setDateOfBirth(LocalDate.of(1970, 1, 12));
+        person.setAlive(i % 2 == 0);
+        person.setMaritalStatus(Person.MaritalStatus.Divorced);
+        person.save();
+        return person;
+    }
 }

@@ -33,12 +33,14 @@ public class Bootstrap implements ServletContextListener {
                 "                maritalStatus varchar" +
                 ")").execute());
 
+        generateTestingData();
+    }
+
+    public static void generateTestingData() {
         jdbi().useTransaction(handle -> {
-            for (int i = 0; i < 1000; i++) {
-                final Person person = new Person("Jon Lord" + i, 42);
-                person.setDateOfBirth(LocalDate.of(1970, 1, 12));
-                person.setMaritalStatus(Person.MaritalStatus.Divorced);
-                person.save();
+            Person.dao.deleteAll();
+            for (int i = 0; i < 200; i++) {
+                Person.createDummy(i);
             }
         });
     }
