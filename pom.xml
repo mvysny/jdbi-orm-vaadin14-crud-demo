@@ -22,15 +22,6 @@
         <drivers.downloader.phase>pre-integration-test</drivers.downloader.phase>
     </properties>
 
-    <repositories>
-        <!-- Repository used by many Vaadin add-ons -->
-        <repository>
-             <id>Vaadin Directory</id>
-             <url>https://maven.vaadin.com/vaadin-addons</url>
-            <snapshots><enabled>false</enabled></snapshots>
-        </repository>
-    </repositories>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -47,7 +38,7 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <!-- Replace artifactId with vaadin-core to use only free components -->
-            <artifactId>vaadin</artifactId>
+            <artifactId>vaadin-core</artifactId>
             <exclusions>
                 <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
                 <exclusion>
@@ -159,7 +150,6 @@
         </resources>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
             </plugin>
