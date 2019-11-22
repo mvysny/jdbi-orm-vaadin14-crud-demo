@@ -7,7 +7,7 @@
     <artifactId>jdbi-orm-vaadin14-crud-demo</artifactId>
     <name>JDBI-ORM Vaadin14 CRUD demo</name>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
