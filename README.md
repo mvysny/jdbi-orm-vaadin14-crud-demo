@@ -62,7 +62,7 @@ Head to [localhost:8080/](http://localhost:8080).
 
 ## Heroku Integration
 
-See the [Live Demo of the app running on Heroku](https://vaadin14-embedded-jetty.herokuapp.com/).
+See the [Live Demo of the app running on Heroku](https://jdbi-orm-vaadin14-crud-demo.herokuapp.com/).
 
 To integrate with Heroku, you need to activate two Maven profiles:
 
