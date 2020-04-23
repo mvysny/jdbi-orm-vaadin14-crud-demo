@@ -9,8 +9,6 @@ import kotlin.Unit;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
 import static com.github.mvysny.kaributesting.v10.GridKt.*;
 import static com.github.mvysny.kaributesting.v10.LocatorJ.*;
 import static org.junit.Assert.*;

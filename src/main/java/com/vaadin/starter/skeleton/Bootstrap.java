@@ -18,14 +18,27 @@ import static com.gitlab.mvysny.jdbiorm.JdbiOrm.jdbi;
  */
 @WebListener
 public class Bootstrap implements ServletContextListener {
+    /**
+     * Initializes the application.
+     * @param servletContextEvent unused
+     */
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+        // 1. Initialize the database.
+        // JDBI-ORM requires a JDBC DataSource. We will use
+        // the HikariCP connection pool which keeps certain amount of JDBC connections around since they're expensive
+        // to construct.
         final HikariConfig hikariConfig = new HikariConfig();
+        // We tell HikariCP to use the in-memory H2 database.
         hikariConfig.setJdbcUrl("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
         hikariConfig.setMinimumIdle(0);
-
+        // Let's create the DataSource and set it to JDBI-ORM
         JdbiOrm.setDataSource(new HikariDataSource(hikariConfig));
+        // Done! The database layer is now ready to be used.
 
+        // 2. Let's prepare the database and create the database tables.
+        // Generally you should use FlyWay to migrate your database to newer version,
+        // but I wanted to keep things simple here.
         jdbi().useHandle(handle -> handle.createUpdate("create table if not exists Person (\n" +
                 "                id bigint primary key auto_increment,\n" +
                 "                name varchar not null,\n" +
@@ -37,6 +50,7 @@ public class Bootstrap implements ServletContextListener {
                 "                maritalStatus varchar" +
                 ")").execute());
 
+        // 3. Generate some example data
         generateTestingData();
     }
 
@@ -51,6 +65,9 @@ public class Bootstrap implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
+        // Tear down the app. Simply close the JDBI-ORM, which will close the
+        // underlying HikariDataSource, which will clean up the pool, close
+        // all pooled JDBC connections, stop all threads etc.
         JdbiOrm.destroy();
     }
 }
