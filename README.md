@@ -32,9 +32,9 @@ How this works:
    will call the `Bootstrap` class since it's a WebListener
    (Google for "Servlet WebListener" for more info on how this standard Servlet machinery works).
 2. `Bootstrap` will configure the database: it will create HikariCP (a JDBC connection
-   pool which keeps certain count of JDBC connections around since they're expensive
+   pool which keeps certain amount of JDBC connections around since they're expensive
    to construct), it will configure HikariCP to use the in-memory H2 database, and
-   it will set the DataSource to the JDBI-ORM library.
+   it will set the DataSource to the JDBI-ORM library. Done - the database layer is ready.
 3. `Bootstrap` will also create the database tables for us. Generally you should use
    FlyWay to migrate your database to newer version, but I wanted to keep things simple here.
 4. Since the database is now configured, `Bootstrap` can now simply access the database
