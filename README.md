@@ -28,7 +28,7 @@ should auto-redeploy changed classes and resources.
 
 How this works:
 
-1. Everything starts in the `Bootstrap` class. Jetty (run via `ManualJetty` class)
+1. The app is initialized in the `Bootstrap` class. Jetty (run via `ManualJetty` class)
    will call the `Bootstrap` class since it's a WebListener
    (Google for "Servlet WebListener" for more info on how this standard Servlet machinery works).
 2. `Bootstrap` will configure the database: it will create HikariCP (a JDBC connection
