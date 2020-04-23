@@ -50,6 +50,37 @@ Let's look at all files that this project is composed of, and what are the point
 | [frontend/](frontend) | TODO
 | `node_modules` | populated by `npm` - contains sources of all JavaScript web components.
 
+How this works:
+
+1. Everything starts in the `Bootstrap` class. Jetty (run via `ManualJetty` class)
+   will call the `Bootstrap` class since it's a WebListener
+   (Google for "Servlet WebListener" for more info on how this standard Servlet machinery works).
+2. `Bootstrap` will configure the database: it will create HikariCP (a JDBC connection
+   pool which keeps certain count of JDBC connections around since they're expensive
+   to construct), it will configure HikariCP to use the in-memory H2 database, and
+   it will set the DataSource to the JDBI-ORM library.
+3. `Bootstrap` will also create the database tables for us. Generally you should use
+   FlyWay to migrate your database to newer version, but I wanted to keep things simple here.
+4. Since the database is now configured, `Bootstrap` can now simply access the database
+   and generate a set of sample data for us. See how easy is to use JDBI to
+   manage transactions for us - no interceptors needed.
+5. Done - the application is now configured. You can now navigate to [localhost:8080/](http://localhost:8080)
+   for Vaadin to do its job. Vaadin can now simply call `Person.dao` directly to fetch the data -
+   no dependency injection needed.
+
+Testing:
+
+1. Typically we would have to laborously mock out the database in order to test the UI, but
+   we really don't have to: it's very easy to bootstrap the application including the database.
+   And so we can simply perform a full system testing right away very fast.
+   To initialize the app, simply call `new Bootstrap().contextInitialized(null)`
+   to start the app in the current JVM. That's exactly what `AbstractAppLauncher` is doing.
+2. Selenium-based tests are very slow, fail randomly, they are hard to maintain,
+   error-prone and require a server up-and-running.
+   Why bother, when we can use [Karibu-Testing](https://github.com/mvysny/karibu-testing)
+   instead? This approach is demoed in `MainViewTest` class.
+3. Done - to run the tests simply run `mvn clean test`.
+
 ## Packaging for production
 
 To package in production mode:
