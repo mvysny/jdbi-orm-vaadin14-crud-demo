@@ -55,7 +55,8 @@ Testing:
    error-prone and require a server up-and-running.
    Why bother, when we can use [Karibu-Testing](https://github.com/mvysny/karibu-testing)
    instead? This approach is demoed in `MainViewTest` class.
-3. Done - to run the tests simply run `mvn clean test`.
+3. Done - to run the tests simply run `mvn clean test`, or simply run the `MainViewTest` class
+   from your IDE.
 
 Let's look at all files that this project is composed of, and what are the points where you'll add functionality:
 
