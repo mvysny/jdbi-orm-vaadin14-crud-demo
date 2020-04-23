@@ -26,30 +26,6 @@ should auto-redeploy changed classes and resources.
 
 ## About The Project
 
-Let's look at all files that this project is composed of, and what are the points where you'll add functionality:
-
-| Files | Meaning
-| ----- | -------
-| [pom.xml](pom.xml) | Maven 2 build tool configuration files. Maven is used to compile your app, download all dependency jars and build a war file
-| [.travis.yml](.travis.yml) | Configuration file for [Travis-CI](http://travis-ci.org/) which tells Travis how to build the app. Travis watches your repo; it automatically builds your app and runs all the tests after every commit.
-| [.gitignore](.gitignore) | Tells [Git](https://git-scm.com/) to ignore files that can be produced from your app's sources - be it files produced by Gradle, Intellij project files etc.
-| [Procfile](Procfile) | Configures Heroku on how your application is launched in the cloud.
-| [webpack.config.js](webpack.config.js) | TODO
-| [src/main/java](src/main/java) | Place the sources of your app here.
-| [MainView.java](src/main/java/com/vaadin/starter/skeleton/MainView.java) | The main view, shown when you browse for http://localhost:8080/
-| [Person.java](src/main/java/com/vaadin/starter/skeleton/Person.java) | The `Person` entity mapped to the SQL database table `person`. Includes DAO (data access object) helper methods.
-| [PersonForm.java](src/main/java/com/vaadin/starter/skeleton/PersonForm.java) | A form component which edits the `Person` entity. Uses [Vaadin Binder](https://vaadin.com/docs/flow/binding-data/tutorial-flow-components-binder.html) to populate form components with data from the `Person` entity.
-| [Bootstrap.java](src/main/java/com/vaadin/starter/skeleton/Bootstrap.java) | Configures the database and creates the `Person` database table.
-| [CreateEditPersonDialog.java](src/main/java/com/vaadin/starter/skeleton/CreateEditPersonDialog.java) | A dialog which edits the `Person` entity. Uses `PersonForm`.
-| [ManualJetty.java](src/main/java/com/vaadin/starter/skeleton/ManualJetty.java) | Launches the Embedded Jetty; just run the `main()` method.
-| [src/main/resources/](src/main/resources) | A bunch of static files not compiled by Java in any way; see below for explanation.
-| [simplelogger.properties](src/main/resources/simplelogger.properties) | Configures the logging engine; this demo uses the SLF4J logging library with slf4j-simple logger.
-| [src/main/webapp/](src/main/webapp) | Static web files served as-is by the web container.
-| [src/test/java/](src/test/java) | Your unit & integration tests go here.
-| [MainViewTest.java](src/test/java/com/vaadin/starter/skeleton/MainViewTest.java) | Tests the Vaadin UI; uses the [Karibu-Testing](https://github.com/mvysny/karibu-testing) UI test library.
-| [frontend/](frontend) | TODO
-| `node_modules` | populated by `npm` - contains sources of all JavaScript web components.
-
 How this works:
 
 1. Everything starts in the `Bootstrap` class. Jetty (run via `ManualJetty` class)
@@ -80,6 +56,30 @@ Testing:
    Why bother, when we can use [Karibu-Testing](https://github.com/mvysny/karibu-testing)
    instead? This approach is demoed in `MainViewTest` class.
 3. Done - to run the tests simply run `mvn clean test`.
+
+Let's look at all files that this project is composed of, and what are the points where you'll add functionality:
+
+| Files | Meaning
+| ----- | -------
+| [pom.xml](pom.xml) | Maven 2 build tool configuration files. Maven is used to compile your app, download all dependency jars and build a war file
+| [.travis.yml](.travis.yml) | Configuration file for [Travis-CI](http://travis-ci.org/) which tells Travis how to build the app. Travis watches your repo; it automatically builds your app and runs all the tests after every commit.
+| [.gitignore](.gitignore) | Tells [Git](https://git-scm.com/) to ignore files that can be produced from your app's sources - be it files produced by Gradle, Intellij project files etc.
+| [Procfile](Procfile) | Configures Heroku on how your application is launched in the cloud.
+| [webpack.config.js](webpack.config.js) | TODO
+| [src/main/java](src/main/java) | Place the sources of your app here.
+| [MainView.java](src/main/java/com/vaadin/starter/skeleton/MainView.java) | The main view, shown when you browse for http://localhost:8080/
+| [Person.java](src/main/java/com/vaadin/starter/skeleton/Person.java) | The `Person` entity mapped to the SQL database table `person`. Includes DAO (data access object) helper methods.
+| [PersonForm.java](src/main/java/com/vaadin/starter/skeleton/PersonForm.java) | A form component which edits the `Person` entity. Uses [Vaadin Binder](https://vaadin.com/docs/flow/binding-data/tutorial-flow-components-binder.html) to populate form components with data from the `Person` entity.
+| [Bootstrap.java](src/main/java/com/vaadin/starter/skeleton/Bootstrap.java) | Configures the database and creates the `Person` database table.
+| [CreateEditPersonDialog.java](src/main/java/com/vaadin/starter/skeleton/CreateEditPersonDialog.java) | A dialog which edits the `Person` entity. Uses `PersonForm`.
+| [ManualJetty.java](src/main/java/com/vaadin/starter/skeleton/ManualJetty.java) | Launches the Embedded Jetty; just run the `main()` method.
+| [src/main/resources/](src/main/resources) | A bunch of static files not compiled by Java in any way; see below for explanation.
+| [simplelogger.properties](src/main/resources/simplelogger.properties) | Configures the logging engine; this demo uses the SLF4J logging library with slf4j-simple logger.
+| [src/main/webapp/](src/main/webapp) | Static web files served as-is by the web container.
+| [src/test/java/](src/test/java) | Your unit & integration tests go here.
+| [MainViewTest.java](src/test/java/com/vaadin/starter/skeleton/MainViewTest.java) | Tests the Vaadin UI; uses the [Karibu-Testing](https://github.com/mvysny/karibu-testing) UI test library.
+| [frontend/](frontend) | TODO
+| `node_modules` | populated by `npm` - contains sources of all JavaScript web components.
 
 ## Packaging for production
 
