@@ -30,18 +30,18 @@ How this works:
 
 1. The app is initialized in the `Bootstrap` class. Jetty (run via `ManualJetty` class)
    will call the `Bootstrap` class since it's a WebListener
-   (Google for "Servlet WebListener" for more info on how this standard Servlet machinery works).
-2. `Bootstrap` will configure the database: it will create HikariCP (a JDBC connection
+   (google for "Servlet WebListener" for more info on how this standard Servlet machinery works).
+2. `Bootstrap` will configure the database: it will create [HikariCP](https://github.com/brettwooldridge/HikariCP) (a JDBC connection
    pool which keeps certain amount of JDBC connections around since they're expensive
    to construct), it will configure HikariCP to use the in-memory H2 database, and
-   it will set the DataSource to the JDBI-ORM library. Done - the database layer is ready.
+   it will set the DataSource to the [JDBI-ORM](https://gitlab.com/mvysny/jdbi-orm) library. Done - the database layer is ready.
 3. `Bootstrap` will also create the database tables for us. Generally you should use
    FlyWay to migrate your database to newer version, but I wanted to keep things simple here.
 4. Since the database is now configured, `Bootstrap` can now simply access the database
    and generate a set of sample data for us. See how easy is to use JDBI to
    manage transactions for us - no interceptors needed.
 5. Done - the application is now configured. You can now navigate to [localhost:8080/](http://localhost:8080)
-   for Vaadin to do its job. Vaadin can now simply call `Person.dao` directly to fetch the data -
+   for Vaadin to do its job. Your Vaadin code can now simply call `Person.dao` directly to fetch the data -
    no dependency injection needed.
 
 Testing:
@@ -53,7 +53,7 @@ Testing:
    to start the app in the current JVM. That's exactly what `AbstractAppLauncher` is doing.
 2. Selenium-based tests are very slow, fail randomly, they are hard to maintain,
    error-prone and require a server up-and-running.
-   Why bother, when we can use [Karibu-Testing](https://github.com/mvysny/karibu-testing)
+   Why bother then, when we can simply use [Karibu-Testing](https://github.com/mvysny/karibu-testing)
    instead? This approach is demoed in `MainViewTest` class.
 3. Done - to run the tests simply run `mvn clean test`, or simply run the `MainViewTest` class
    from your IDE.
