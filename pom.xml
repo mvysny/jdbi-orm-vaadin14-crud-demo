@@ -16,7 +16,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
-        <vaadin.version>14.1.25</vaadin.version>
+        <vaadin.version>14.3.0</vaadin.version>
         <jetty.version>9.4.20.v20190813</jetty.version>
 
         <drivers.downloader.phase>pre-integration-test</drivers.downloader.phase>
@@ -105,7 +105,7 @@
         <dependency>
             <groupId>com.github.mvysny.kaributesting</groupId>
             <artifactId>karibu-testing-v10</artifactId>
-            <version>1.1.23</version>
+            <version>1.1.27</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -117,12 +117,12 @@
         <dependency>
             <groupId>com.gitlab.mvysny.jdbiorm</groupId>
             <artifactId>jdbi-orm</artifactId>
-            <version>0.5</version>
+            <version>0.6</version>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <version>3.4.1</version>
+            <version>3.4.5</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -132,7 +132,7 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.1.0.Final</version>
+            <version>6.1.4.Final</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
@@ -164,6 +164,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <pnpmEnable>true</pnpmEnable>
+                </configuration>
             </plugin>
 
             <!-- creates both the "zip" and "uberjar" distributions -->
@@ -222,6 +225,9 @@
                                 <phase>compile</phase>
                             </execution>
                         </executions>
+                        <configuration>
+                            <pnpmEnable>true</pnpmEnable>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>

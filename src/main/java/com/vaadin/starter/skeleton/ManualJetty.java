@@ -26,6 +26,8 @@ public final class ManualJetty {
     }
 
     public static void start(String[] args) throws Exception {
+        // use pnpm instead of npm
+        System.setProperty("vaadin.pnpmEnable", "true");
 
         // detect&enable production mode
         if (isProductionMode()) {
