@@ -244,30 +244,5 @@
                 </plugins>
             </build>
         </profile>
-
-        <profile>
-            <id>heroku</id>
-            <!-- we need to install node+npm locally so that the build succeeds on Heroku, since Heroku Java build lacks node+npm -->
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.github.eirslett</groupId>
-                        <artifactId>frontend-maven-plugin</artifactId>
-                        <version>1.8.0</version>
-                        <executions>
-                            <execution>
-                                <id>install node and npm</id>
-                                <goals>
-                                    <goal>install-node-and-npm</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <nodeVersion>v10.16.0</nodeVersion>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
     </profiles>
 </project>
