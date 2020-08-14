@@ -1,17 +1,16 @@
 package com.vaadin.starter.skeleton;
 
-import com.github.mvysny.kaributesting.v10.GridKt;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.textfield.TextField;
 import kotlin.Unit;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mvysny.kaributesting.v10.GridKt.*;
 import static com.github.mvysny.kaributesting.v10.LocatorJ.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Uses the Karibu-Testing framework: https://github.com/mvysny/karibu-testing/tree/master/karibu-testing-v10
@@ -19,7 +18,7 @@ import static org.junit.Assert.*;
  * @author mavi
  */
 public class MainViewTest extends AbstractAppLauncher {
-    @Before
+    @BeforeEach
     public void navigateToMainView() {
         Person.dao.deleteAll();
         UI.getCurrent().navigate("");
@@ -67,7 +66,7 @@ public class MainViewTest extends AbstractAppLauncher {
         // check that the grid has been refreshed
         grid = _get(Grid.class);
         final String formattedRow = String.join(", ", _getFormattedRow(grid, 0));
-        assertTrue("row: " + formattedRow, formattedRow.contains("Vladimir Harkonnen") &&
-                !formattedRow.contains("Jon Lord"));
+        assertTrue(formattedRow.contains("Vladimir Harkonnen") &&
+                !formattedRow.contains("Jon Lord"), "row: " + formattedRow);
     }
 }

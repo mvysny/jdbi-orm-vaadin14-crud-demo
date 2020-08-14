@@ -2,21 +2,20 @@ package com.vaadin.starter.skeleton;
 
 import com.github.mvysny.kaributesting.v10.MockVaadin;
 import com.github.mvysny.kaributesting.v10.Routes;
-import com.gitlab.mvysny.jdbiorm.JdbiOrm;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Makes sure the application is up-and-running and Vaadin is mocked (using the
  * Karibu-Testing library), so that everything is prepared for testing.
  * @author mavi
  */
-public class AbstractAppLauncher {
+public abstract class AbstractAppLauncher {
     private static Routes routes;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         // Typically we would have to laborously mock out the database in order to test the UI,
         // but we really don't have to: it's very easy to bootstrap the application
@@ -26,17 +25,17 @@ public class AbstractAppLauncher {
         routes = new Routes().autoDiscoverViews("com.vaadin.starter.skeleton");
     }
 
-    @AfterClass
+    @AfterAll
     public static void teardown() {
         new Bootstrap().contextDestroyed(null);
     }
 
-    @Before
+    @BeforeEach
     public void setupVaadin() {
         MockVaadin.setup(routes);
     }
 
-    @After
+    @AfterEach
     public void teardownVaadin() {
         MockVaadin.tearDown();
     }
