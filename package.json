@@ -10,9 +10,9 @@
       "@vaadin/vaadin-icons": "4.3.1",
       "@vaadin/vaadin-split-layout": "4.2.0",
       "@vaadin/vaadin-combo-box": "5.2.0",
-      "@vaadin/vaadin-core-shrinkwrap": "14.3.0",
+      "@vaadin/vaadin-core-shrinkwrap": "14.3.3",
       "@vaadin/vaadin-upload": "4.3.0",
-      "@vaadin/vaadin-dialog": "2.4.2",
+      "@vaadin/vaadin-dialog": "2.4.3",
       "@vaadin/vaadin-select": "2.2.0",
       "@vaadin/vaadin-app-layout": "2.1.0",
       "@vaadin/vaadin-item": "2.2.0",
@@ -51,7 +51,7 @@
       "webpack-merge": "4.2.2",
       "webpack-dev-server": "3.10.3"
     },
-    "hash": "eb750a6e959b44474fd5d40f68c6362477a13f98114b57f67a40a78fa7efcdd1"
+    "hash": "980b08beb0ad655ee716c99c14b5ef1132c858b6909f2b5629302b68881e3419"
   },
   "dependencies": {
     "lit-element": "^2.2.1",
@@ -61,9 +61,9 @@
     "@vaadin/vaadin-icons": "4.3.1",
     "@vaadin/vaadin-split-layout": "4.2.0",
     "@vaadin/vaadin-combo-box": "5.2.0",
-    "@vaadin/vaadin-core-shrinkwrap": "14.3.0",
+    "@vaadin/vaadin-core-shrinkwrap": "14.3.3",
     "@vaadin/vaadin-upload": "4.3.0",
-    "@vaadin/vaadin-dialog": "2.4.2",
+    "@vaadin/vaadin-dialog": "2.4.3",
     "@vaadin/vaadin-select": "2.2.0",
     "@vaadin/vaadin-app-layout": "2.1.0",
     "@vaadin/vaadin-item": "2.2.0",
