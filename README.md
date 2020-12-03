@@ -5,23 +5,78 @@
 A demo project showing the CRUD capabilities of the [JDBI-ORM](https://gitlab.com/mvysny/jdbi-orm)
 ORM library.
 
+Both the development and production modes are supported. Also, the project
+demoes packaging itself both into a flatten uberjar and a zip file containing
+a list of jars and a runner script. See "Packaging for production" below
+for more details.
+
 ## Running
 
 Clone this github repository and import the project to the IDE of your choice as a Maven project. You need to have Java 8 or 11 installed.
+
+To run quickly from the command-line in development mode:
+
+1. Run `./mvnw -C clean package exec:java`
+2. Your app will be running on [http://localhost:8080](http://localhost:8080).
+
+To run the app from your IDE:
 
 1. Import the project into your IDE
 2. Run `mvn -C clean package` in the project, to configure Vaadin for npm mode.
 3. Run/Debug the `ManualJetty` class as an application (run the `main()` method).
    The app will use npm to download all javascript libraries (will take a long time)
    and will start in development mode.
+4. Your app will be running on [http://localhost:8080](http://localhost:8080).
    
 See [ManualJetty.java](src/main/java/com/vaadin/starter/skeleton/ManualJetty.java)
 for details on how Jetty is configured for embedded mode.
 
-## Developing
+### Missing `/src/main/webapp`?
 
-Run the `ManualJetty` class in debug mode - the JVM hot-redeployment capabilities
-should auto-redeploy changed classes and resources.
+Yeah, since we're not packaging to WAR but to uberjar/zip+jar, the `webapp` folder needs to be
+served from the jar itself, and therefore it needs to reside in `src/main/resources/webapp`.
+
+## Packaging for production
+
+To package in production mode:
+
+1. `mvn -C clean package -Pproduction`
+
+The project packages itself in two ways:
+
+1. As a flatten uberjar (a jar with all dependencies unpacked inside, which you can simply launch with `java -jar`).
+   Please read below regarding inherent issues with flat uberjars.
+   The deployable file is in `target/vaadin14-embedded-jetty-1.0-SNAPSHOT-uberjar.jar`
+2. As a zip file with dependencies. The file is in `target/vaadin14-embedded-jetty-1.0-SNAPSHOT-zip.zip`
+
+## Running in production mode
+
+To build&run the flat uberjar:
+
+1. `mvn -C clean package -Pproduction`
+2. `cd target`
+3. `java -jar jdbi-orm-vaadin14-crud-demo-1.0-SNAPSHOT-uberjar.jar`
+
+To build&run the zip file:
+
+1. `mvn -C clean package -Pproduction`
+2. `cd target`
+3. `unzip jdbi-orm-vaadin14-crud-demo-1.0-SNAPSHOT-zip.zip`
+4. `./run`
+
+Head to [localhost:8080/](http://localhost:8080).
+
+## Warning Regarding Flat Uberjar
+
+There is an inherent problem with flat uberjar (everything unpacked, then packed as a single jar):
+it disallows repeated resources or duplicate files. That can be problematic especially for Java Service API
+property files located under `META-INF/services/`, since the flat uberjar will simply
+throw away any duplicate property files, which can cause certain libraries to remain unconfigured.
+You should therefore always prefer the zip+jar distribution; if you keep using
+flat uberjar then please keep these limitations in mind.
+
+Another inherent issue is that it's impossible to see the dependencies of the app
+as a list of jars in the `lib/` folder, since everything is unpacked into one huge jar file.
 
 ## About The Project
 
