@@ -9,7 +9,6 @@ import org.eclipse.jetty.webapp.*;
 import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
 
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 
 /**
