@@ -4,7 +4,6 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.textfield.TextField;
-import kotlin.Unit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author mavi
  */
+@SuppressWarnings("unchecked")
 public class MainViewTest extends AbstractAppLauncher {
     @BeforeEach
     public void navigateToMainView() {
@@ -41,7 +41,7 @@ public class MainViewTest extends AbstractAppLauncher {
         Person.createDummy(0);
         assertNotNull(Person.dao.findByName("Jon Lord0"));
         final Grid<Person> grid = _get(Grid.class);
-        _clickRenderer(grid, 0, "delete", component -> Unit.INSTANCE);
+        _clickRenderer(grid, 0, "delete");
         expectRows(grid, 0);
         assertNull(Person.dao.findByName("Jon Lord0"));
     }
@@ -53,7 +53,7 @@ public class MainViewTest extends AbstractAppLauncher {
     public void testEditPerson() {
         Person.createDummy(0);
         Grid<Person> grid = _get(Grid.class);
-        _clickRenderer(grid, 0, "edit", component -> Unit.INSTANCE);
+        _clickRenderer(grid, 0, "edit");
         // the dialog is shown
         _assertOne(PersonForm.class);
         _setValue(_get(TextField.class, spec -> spec.withCaption("Name:")), "Vladimir Harkonnen");

@@ -16,10 +16,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
-        <vaadin.version>14.4.4</vaadin.version>
+        <vaadin.version>14.5.3</vaadin.version>
         <jetty.version>9.4.35.v20201120</jetty.version>
-
-        <drivers.downloader.phase>pre-integration-test</drivers.downloader.phase>
     </properties>
 
     <dependencyManagement>
@@ -111,13 +109,13 @@
         <dependency>
             <groupId>com.github.mvysny.kaributesting</groupId>
             <artifactId>karibu-testing-v10</artifactId>
-            <version>1.2.6</version>
+            <version>1.2.12</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.7.0</version>
+            <version>5.7.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -170,9 +168,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <pnpmEnable>true</pnpmEnable>
-                </configuration>
             </plugin>
 
             <!-- creates both the "zip" and "uberjar" distributions -->
@@ -246,9 +241,6 @@
                                 <phase>compile</phase>
                             </execution>
                         </executions>
-                        <configuration>
-                            <pnpmEnable>true</pnpmEnable>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
